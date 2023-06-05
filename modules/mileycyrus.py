@@ -1,9 +1,7 @@
 import requests
 from faker import Faker
 
-def mileycyrus(email):
-
-    fake = Faker('en_US')
+class Mileycyrus_newspaper:
 
     headers = {
         'authority': 'www.mileycyrus.com',
@@ -22,16 +20,10 @@ def mileycyrus(email):
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
     }
 
-    print(fake.postalcode())
+    def subscribe(self, email_address):
+        data = {
+            "field_email_address": email_address
+        }
 
-    data = {
-    "field_email_address": email
-    }
-
-    response = requests.post('https://subs.sonymusicfans.com/submit/', data=data, headers=headers)
-    #https://subs.sonymusicfans.com/submit
-    #response = requests.post('https://www.sonymusicfans.com/', params=data, headers=headers)
-    print(response.text)
-    print(response.history)
-
-mileycyrus('yosryvcxz3v196@gmail.com')
+        response = requests.post('https://subs.sonymusicfans.com/submit/', data=data, headers=self.headers)
+        print(response.text)

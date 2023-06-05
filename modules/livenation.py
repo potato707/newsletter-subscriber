@@ -2,15 +2,8 @@ import requests
 import time
 from faker import Faker
 
-def livenation(email):
-    timestamp = int(time.time())
-    cookies_expire = timestamp + 1684268245369
-    fake = Faker('en_US')
 
-    cookies = {
-        'QueueITAccepted-SDFrts345E-V3_livenation': f'EventId%3Dlivenation%26QueueId%3D00000000-0000-0000-0000-000000000000%26RedirectType%3Ddisabled%26IssueTime%3D{timestamp}%26Hash%3Db40c57a9942dc4089bb0d45ff579961463540c0d662a77639b7bff5ff4977618',
-        '_dd_s': f'logs=0&expire={cookies_expire}',
-    }
+class Livenation_newspaper:
 
     headers = {
         'Accept': 'application/json, text/plain, */*',
@@ -28,14 +21,11 @@ def livenation(email):
         'sec-ch-ua-platform': '"Windows"',
     }
 
-    params = {
-        'email': email,
-        'postal_code': fake.postalcode(),
-    }
-    print(params)
-    response = requests.post('https://www.livenation.com/api/newsletter', params=params, cookies=cookies, headers=headers)
-    print(response.text)
-    print(response)
+    def subscribe(self, postal_code, email_address):
+        params = {
+            'email': email_address,
+            'postal_code': postal_code,
+        }
+        response = requests.post('https://www.livenation.com/api/newsletter', params=params, headers=self.headers)
+        print(response)
 
-
-livenation('ahmedyasser70007@gmail.com')
